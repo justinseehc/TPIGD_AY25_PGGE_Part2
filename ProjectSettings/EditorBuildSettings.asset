@@ -9,6 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/0Preload.unity
     guid: 63bc81e854032e34ebd96aa16540fce1
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/SinglePlayer00.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
