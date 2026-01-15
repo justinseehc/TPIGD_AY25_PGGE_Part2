@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PGGE.Patterns;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class Player : MonoBehaviour
 {
@@ -41,6 +43,7 @@ public class Player : MonoBehaviour
 
     Dictionary<AudioClip, bool> mSoundStatus = new Dictionary<AudioClip, bool>();
 
+    private PhotonView mPhotonView;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +57,7 @@ public class Player : MonoBehaviour
         mSoundStatus.Add(mReloadSound, false);
         mSoundStatus.Add(mNoAmmoSound, false);
 
+        mPhotonView = gameObject.GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -98,12 +102,15 @@ public class Player : MonoBehaviour
         {
             mAttackButtons[2] = false;
         }
+
+        if (mPhotonView != null && !PhotonNetwork.OfflineMode && ! mPhotonView.IsMine) return;
     }
 
     public void Move()
     {
         mPlayerMovement.HandleInputs();
         mPlayerMovement.Move();
+        if (mPhotonView != null && !PhotonNetwork.OfflineMode && !mPhotonView.IsMine) return;
     }
 
     public void NoAmmo()
